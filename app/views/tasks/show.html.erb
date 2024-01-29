@@ -1,0 +1,15 @@
+
+<h1><%= @task.title %></h1>
+
+<p><%= @task.desc %></p>
+
+<p><%= @task.created_at.strftime("%d %b, %Y") %></p>
+<p><%= @task.created_at.strftime("%H:%M") %></p>
+
+<p>
+    <%= @task.is_done ? "Done" : "Not done" %>
+</p>
+
+<%= link_to "Edit", edit_task_path(@task) %>
+<%= link_to "Back", tasks_path %>
+<%= button_to "Delete", task_path(@task), method: :delete %>
