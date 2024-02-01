@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  root to: "tasks#index"
-  resources :tasks
-  
-  # get "/signup", to: "users#new"
-  # resources :users, only: [:new, :create]
+  root to: "users#show", as: "home"
 
-  # get "/login", to: "sessions#new"
-  # post "/login", to: "sessions#create"
-end 
+  get "/signup", to: "users#new", as: "signup"
+
+  resources :users
+  resources :tasks
+  resources :sessions, only: [:new, :create, :destroy]
+
+  get "/login", to: "sessions#new", as: "login"
+  post "/login", to: "sessions#create"
+  get "/logout", to: "sessions#destroy", as: "logout"
+end

@@ -1,6 +1,5 @@
 <h1>Hello</h1>
 
-<%# Reder tasks %>
 <ul>
     <% @tasks.each do |task| %>
         <li>
@@ -8,3 +7,9 @@
         </li>
     <% end %>
 </ul>
+
+<%# display user id %>
+<%= @user.name %>
+
+<%= link_to 'New Task', new_task_path %>
+<%= link_to 'Logout', logout_path %>

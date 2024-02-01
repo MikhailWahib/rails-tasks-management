@@ -1,0 +1,9 @@
+<h1>Add a new task</h1>
+
+<%= form_with model: @task, url: @task, method: :post do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :description %>
+    <%= f.text_area :desc %>
+    <%= f.submit %>
+<% end %>
