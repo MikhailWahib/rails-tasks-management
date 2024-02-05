@@ -7,15 +7,11 @@ class UsersController < ApplicationController
         if user_id.present?
             @user = User.find_by(id: user_id)
 
-            if @user
-                @tasks = @user.tasks
-            else
-                redirect_to root_path
-            end
-            else
-                redirect_to root_path
-            end
+            @tasks = @user.tasks if @user
+        else
+            redirect_to login_path
         end
+    end
 
     def new
         @user = User.new
