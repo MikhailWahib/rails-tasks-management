@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   root to: 'users#show', as: 'home'
 
-  get '/signup', to: 'users#new', as: 'signup'
 
-  resources :users, only: %i[new create]
+  resources :users, only: %i[create]
   resources :tasks, only: %i[index new create edit update destroy]
   resources :sessions, only: %i[new create destroy]
 
+  get '/signup', to: 'users#new', as: 'signup'
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy', as: 'logout'
