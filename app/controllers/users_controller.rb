@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :redirect_if_logged_in, only: [:new]
+    before_action :redirect_if_not_logged_in, only: [:show]
 
     def show
         user_id = session[:user_id]
@@ -48,4 +49,9 @@ class UsersController < ApplicationController
     def redirect_if_logged_in
         redirect_to home_path if session[:user_id].present?
     end
+
+    def redirect_if_not_logged_in
+        redirect_to login_path unless session[:user_id].present?
+    end
+
 end
