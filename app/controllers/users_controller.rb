@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :redirect_if_logged_in, only: [:new, :create]
+    before_action :redirect_if_logged_in, only: [:new]
 
     def show
         user_id = session[:user_id]
@@ -20,10 +20,17 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
 
-        if @user.save
-            redirect_to login_path
+        # check if email already exists
+        existing_user = User.find_by(email: @user.email)
+
+        if existing_user
+            # display error
         else
-            render :new
+            if @user.save
+                redirect_to login_path
+            else
+                render :new
+            end
         end
     end
 
@@ -39,6 +46,6 @@ class UsersController < ApplicationController
     end
 
     def redirect_if_logged_in
-        redirect_to tasks_path if session[:user_id].present?
+        redirect_to home_path if session[:user_id].present?
     end
 end

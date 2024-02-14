@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_if_logged_in, only: %i[new create]
+  before_action :redirect_if_logged_in, only: [:new]
 
   def new
     @user = User.new
@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
   private
 
   def redirect_if_logged_in
-    redirect_to tasks_path if session[:user_id].present?
+    redirect_to home_path if session[:user_id].present?
   end
 end
