@@ -40,5 +40,5 @@ class UsersController < ApplicationController
 
     def redirect_if_logged_in
         redirect_to tasks_path if session[:user_id].present?
-      end
+    end
 end

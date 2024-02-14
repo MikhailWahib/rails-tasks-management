@@ -1,15 +1,21 @@
-<h1>Hello</h1>
-
-<ul>
+<div class="container d-flex flex-column justify-content-center align-items-start mt-5">
+  <div class="d-flex justify-content-between align-items-center w-75 mx-auto">
+    <h1>Hello, <%= @user.name.split.first.capitalize %></h1>
+    <%= link_to 'New Task', new_task_path, class:'btn btn-success' %>
+  </div>
+  <ul class="list-group w-75 my-5 mx-auto">
     <% @tasks.each do |task| %>
-        <li>
-            <%= link_to task.title, task %>
-        </li>
+      <li class="list-group-item" id="task-<%= task.id %>">
+        <div>
+          <h3 class="<%= task.is_done ? 'text-decoration-line-through' : '' %>"><%= task.title %></h3>
+          <p><%= task.desc %></p>
+        </div>
+        <div class="d-flex gap-3">
+          <%= button_to "Mark as #{task.is_done ? 'not done' : 'done'}", toggle_status_path(task), method: :patch, class:"btn #{task.is_done ? 'btn-danger' : 'btn-success'}" %>
+          <%= link_to 'Edit', edit_task_path(task), class:'btn btn-secondary' %>
+          <%= button_to 'Delete', task_path(task), method: :delete, class:'btn btn-danger' %>
+        </div>
+      </li>
     <% end %>
-</ul>
-
-<%# display user id %>
-<%= @user.name %>
-
-<%= link_to 'New Task', new_task_path %>
-<%= link_to 'Logout', logout_path %>
+  </ul>
+</div>

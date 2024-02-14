@@ -1,9 +1,14 @@
-<h1>Add a new task</h1>
-
-<%= form_with model: @task, url: @task, method: :post do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-    <%= f.label :description %>
-    <%= f.text_area :desc %>
-    <%= f.submit %>
-<% end %>
+<div class="w-25 mx-auto", style="margin-top: 120px">
+  <h1>Add a new task</h1>
+  <%= form_with model: @task, url: @task, method: :post do |f| %>
+    <div class="mb-3">
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :description, class: "form-label" %>
+      <%= f.text_area :desc, class: "form-control" %>
+    </div>
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -26,13 +26,19 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+
+    if @task.user_id != session[:user_id]
+      redirect_to home_path
+    end
+
+    render :edit
   end
 
   def update
     @task = Task.find(params[:id])
 
     if @task.update(task_params)
-      redirect_to @task
+      redirect_to home_path
     else
       render :edit
     end
@@ -41,6 +47,13 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
+    redirect_to home_path
+  end
+
+  def toggle_status
+    @task = Task.find(params[:id])
+    @task.is_done = !@task.is_done
+    @task.save
     redirect_to home_path
   end
 
