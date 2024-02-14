@@ -1,6 +1,6 @@
 <div class="w-25 mx-auto", style="margin-top: 120px">
   <h2>Login</h2>
-  <%= form_for(:session, url: login_path) do |f| %>
+  <%= form_with model: @session, url: login_path do |f| %>
     <div class="mb-3">
       <%= f.label :email, class: 'form-label' %>
       <%= f.email_field :email, class: 'form-control' %>

@@ -6,15 +6,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: session_params[:email])
+    @user = User.find_by(email: params[:email])
 
-    if @user
-      if @user.authenticate(session_params[:password])
-        session[:user_id] = @user.id
-        redirect_to home_path
-      else
-        render :new
-      end
+    puts params
+
+    if @user&.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect_to home_path
+    else
+      render :new
     end
   end
 
