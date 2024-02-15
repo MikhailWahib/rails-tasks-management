@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_if_logged_in, only: [:new]
+  before_action :authenticate_user, only: [:destroy]
 
   def new
     @user = User.new
@@ -8,14 +8,11 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
 
-    puts '--------------------------'
-    puts params[:email]
-    puts '--------------------------'
-
     if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to home_path
     else
+      flash.now[:danger] = 'Invalid email or password'
       render :new, status: :unprocessable_entity
     end
   end
@@ -23,15 +20,5 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to login_path
-  end
-
-  private
-
-  def session_params
-    params.require(:session).permit(:email, :password)
-  end
-
-  def redirect_if_logged_in
-    redirect_to home_path if session[:user_id].present?
   end
 end

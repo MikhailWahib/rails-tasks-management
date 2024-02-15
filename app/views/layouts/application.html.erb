@@ -9,12 +9,8 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary px-5">
-      <div class="container-fluid">
-        <h1 class="navbar-brand fs-4">Tasks Manager</h1>
-        <%= button_to "Logout", logout_path, method: :post, class: "btn btn-danger" %>
-      </div>
-    </nav>
+    <%= render partial: "layouts/header" %>
+    <%= render partial: "layouts/flash" %>
     <%= yield %>
   </body>
 </html>

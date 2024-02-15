@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to home_path
     else
+      flash.now[:danger] = @user.errors.full_messages[0]
       render :new, status: :unprocessable_entity
     end
   end
