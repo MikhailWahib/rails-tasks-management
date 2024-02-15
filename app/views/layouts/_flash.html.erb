@@ -1,4 +1,3 @@
-<%= javascript_include_tag 'flash' %>
 <% flash.each do |type, message| %>
   <div class="position-absolute alert alert-<%= type %> z-3" style="right: 3.75rem; top: 5rem; opacity: 1; transition: opacity 0.5s">
     <%= message %>
