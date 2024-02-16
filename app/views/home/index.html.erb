@@ -10,7 +10,7 @@
           <h3 class="<%= task.is_done ? 'text-decoration-line-through' : '' %>"><%= task.title %></h3>
           <p><%= task.desc %></p>
         </div>
-        <div class="d-flex gap-3">
+        <div class="d-flex align-items-center gap-3">
           <%= button_to "Mark as #{task.is_done ? 'not done' : 'done'}", toggle_status_path(task), method: :patch, class:"btn #{task.is_done ? 'btn-danger' : 'btn-success'}" %>
           <%= link_to 'Edit', edit_task_path(task), class:'btn btn-secondary' %>
           <%= button_to 'Delete', task_path(task), method: :delete, class:'btn btn-danger' %>
